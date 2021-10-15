@@ -1,0 +1,20 @@
+@import "variables.scss";
+@import "mixins.scss";
+.container {
+    background-color: $primary-color;
+}
+
+.card-header {
+    @include card-heading;
+    background-color: $header-color;
+}
+
+.card-body {
+    @include card-heading;
+    background-color: $card-color;
+}
+
+.tiempodiv {
+    @include weatherbox;
+    background-color: $box-color;
+}

@@ -1,0 +1,10 @@
+@mixin card-heading {
+    font-family: $txt-font;
+    font-style: italic;
+    color: $char-color;
+}
+
+@mixin weatherbox {
+    font-family: $txt-font;
+    color: $txt-color;
+}

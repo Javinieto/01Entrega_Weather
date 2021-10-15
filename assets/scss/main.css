@@ -1,0 +1,21 @@
+.container {
+  background-color: #5ab4f0; }
+
+.card-header {
+  font-family: Georgia, serif;
+  font-style: italic;
+  color: #3e4655;
+  background-color: #86e6f4; }
+
+.card-body {
+  font-family: Georgia, serif;
+  font-style: italic;
+  color: #3e4655;
+  background-color: #8df8f6; }
+
+.tiempodiv {
+  font-family: Georgia, serif;
+  color: #042e7b;
+  background-color: #cef8f9; }
+
+/*# sourceMappingURL=main.css.map */
