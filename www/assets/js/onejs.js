@@ -3,6 +3,7 @@ $(document).ready(function() {
     $("#searchInput").hide();
     $("#btnToday").hide();
     $("#btnDays").hide();
+    $("#btnPlace").hide();
 });
 
 $("#btnHome").click(function() {
@@ -10,6 +11,7 @@ $("#btnHome").click(function() {
     $("#searchInput").hide();
     $("#btnToday").hide();
     $("#btnDays").hide();
+    $("#btnPlace").hide();
     $(".tiempodiv").remove();
 });
 
@@ -18,6 +20,7 @@ $("#btnNow").click(function() {
     $("#searchInput").show();
     $("#btnToday").show();
     $("#btnDays").hide();
+    $("#btnPlace").hide();
     $(".tiempodiv").remove();
 });
 
@@ -26,6 +29,15 @@ $("#btnFuture").click(function() {
     $("#searchInput").show();
     $("#btnToday").hide();
     $("#btnDays").show();
+    $("#btnPlace").hide();
+    $(".tiempodiv").remove();
+});
+$("#btnLocation").click(function() {
+    $("#searchTitle").show();
+    $("#searchInput").hide();
+    $("#btnToday").hide();
+    $("#btnDays").hide();
+    $("#btnPlace").show();
     $(".tiempodiv").remove();
 });
 $("#btnToday").click(function() {
@@ -93,6 +105,48 @@ $("#btnDays").click(function() {
                     "</div>"
                 );
             }
+        }
+    );
+});
+var longitud;
+var latitud;
+var onSuccess = function(position) {
+    latitud = position.coords.latitude;
+    longitud = position.coords.longitude;
+};
+
+// onError Callback receives a PositionError object
+//
+function onError(error) {
+    alert("code: " + error.code + "\n" + "message: " + error.message + "\n");
+}
+
+navigator.geolocation.getCurrentPosition(onSuccess, onError);
+$("#btnPlace").click(function() {
+    $.get(
+        "http://api.openweathermap.org/data/2.5/weather?lat=" +
+        latitud +
+        "&lon=" +
+        longitud +
+        "&appid=51b9a959c32c471d38615818f47e07f6",
+        function(actualweather) {
+            $(".tiempodiv").remove();
+            var nombre = actualweather.name;
+            var temperature = actualweather.main.temp;
+            var grados = temperature - 273.15;
+            var tiempo = actualweather.weather[0].main;
+            var icono = actualweather.weather[0].icon;
+            $("#cityRow").append(
+                "<div  class='card col-6 tiempodiv'><h3> " +
+                nombre +
+                "</h3><img class='imgtiempo' src='http://openweathermap.org/img/wn/" +
+                icono +
+                "@2x.png'/> <h2>" +
+                tiempo +
+                " <br />" +
+                grados.toFixed() +
+                "Cº</h2></div>"
+            );
         }
     );
 });
